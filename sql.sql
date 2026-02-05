@@ -14,31 +14,28 @@ CREATE TABLE Addresses (
     country VARCHAR(40) NOT NULL
 );
 
-
 CREATE TABLE Users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
+    RoleID int,
     customer_name VARCHAR(40) NOT NULL,
     customer_tel VARCHAR(20),
     customer_email VARCHAR(50) NOT NULL UNIQUE,
     address_id INT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT fk_users_address
-        FOREIGN KEY (address_id)
-        REFERENCES Addresses(address_id)
+        FOREIGN KEY (address_id) REFERENCES Addresses(address_id)
+        FOREIGN KEY (RoleId) REFERENCES Roles(RoleID)
 );
-
-
 
 CREATE TABLE Payments (
     payment_id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
+    OrderID INT NOT NULL,
     payment_method_id INT NOT NULL,
     amount DECIMAL(10,2) NOT NULL,
     payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR(20) NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-    FOREIGN KEY (payment_method_id) REFERENCES Payment_Methods(payment_method_id)
+    
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
 );
 
 CREATE TABLE Products (
@@ -49,14 +46,13 @@ CREATE TABLE Products (
     PRIMARY KEY(ProductID)
 );
 
-
 CREATE TABLE Orders (
     OrderID int NOT NULL AUTO_INCREMENT,
     OrderDate DateTime,
     UserID int,
     ProductID int,
     PRIMARY KEY(OrderID),
-    FOREIGN KEY (UserID) REFERENCES users(UserID),
-    FOREIGN KEY (ProductID) REFERENCES products(ProductID)
-    );
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
 
