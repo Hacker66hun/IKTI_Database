@@ -1,5 +1,18 @@
 CREATE DATABASE Webshop
 
+CREATE TABLE Roles (
+    RoleID int NOT NULL AUTO_INCREMENT,
+    RoleName varchar,
+    PRIMARY KEY(RoleID)
+);
+
+CREATE TABLE Addresses (
+    address_id INT AUTO_INCREMENT PRIMARY KEY,
+    street VARCHAR(60) NOT NULL,
+    city VARCHAR(40) NOT NULL,
+    postal_code VARCHAR(15) NOT NULL,
+    country VARCHAR(40) NOT NULL
+);
 
 
 CREATE TABLE Users (
@@ -15,14 +28,6 @@ CREATE TABLE Users (
         REFERENCES Addresses(address_id)
 );
 
-CREATE TABLE Addresses (
-    address_id INT AUTO_INCREMENT PRIMARY KEY,
-    street VARCHAR(60) NOT NULL,
-    city VARCHAR(40) NOT NULL,
-    postal_code VARCHAR(15) NOT NULL,
-    country VARCHAR(40) NOT NULL
-);
-
 
 
 CREATE TABLE Payments (
@@ -35,3 +40,23 @@ CREATE TABLE Payments (
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (payment_method_id) REFERENCES Payment_Methods(payment_method_id)
 );
+
+CREATE TABLE Products (
+    ProductID int NOT NULL AUTO_INCREMENT,
+    ProductName varchar,
+    Price decimal,
+    Stock int,
+    PRIMARY KEY(ProductID)
+);
+
+
+CREATE TABLE Orders (
+    OrderID int NOT NULL AUTO_INCREMENT,
+    OrderDate DateTime,
+    UserID int,
+    ProductID int,
+    PRIMARY KEY(OrderID),
+    FOREIGN KEY (UserID) REFERENCES users(UserID),
+    FOREIGN KEY (ProductID) REFERENCES products(ProductID)
+    );
+
