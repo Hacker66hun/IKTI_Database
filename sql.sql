@@ -15,7 +15,7 @@ CREATE TABLE Addresses (
 );
 
 CREATE TABLE Users (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
     RoleID int,
     customer_name VARCHAR(40) NOT NULL,
     customer_tel VARCHAR(20),
@@ -24,17 +24,6 @@ CREATE TABLE Users (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (address_id) REFERENCES Addresses(address_id),
     FOREIGN KEY (RoleId) REFERENCES Roles(RoleID)
-);
-
-CREATE TABLE Payments (
-    payment_id INT AUTO_INCREMENT PRIMARY KEY,
-    OrderID INT NOT NULL,
-    payment_method_id INT NOT NULL,
-    amount DECIMAL(10,2) NOT NULL,
-    payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(20) NOT NULL,
-    
-    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
 );
 
 CREATE TABLE Products (
@@ -55,3 +44,13 @@ CREATE TABLE Orders (
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
 
+CREATE TABLE Payments (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    OrderID INT NOT NULL,
+    payment_method_id INT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(20) NOT NULL,
+    
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+);
