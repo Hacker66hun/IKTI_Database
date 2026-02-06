@@ -16,11 +16,11 @@ CREATE TABLE Addresses (
 
 CREATE TABLE Users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
-    RoleID int,
+    RoleID int NOT NULL,
     customer_name VARCHAR(40) NOT NULL,
     customer_tel VARCHAR(20),
     customer_email VARCHAR(50) NOT NULL UNIQUE,
-    address_id INT,
+    address_id INT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (address_id) REFERENCES Addresses(address_id),
     FOREIGN KEY (RoleId) REFERENCES Roles(RoleID)
