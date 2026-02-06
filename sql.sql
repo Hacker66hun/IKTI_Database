@@ -2,7 +2,7 @@ CREATE DATABASE Webshop
 
 CREATE TABLE Roles (
     RoleID int NOT NULL AUTO_INCREMENT,
-    RoleName varchar,
+    RoleName varchar(255),
     PRIMARY KEY(RoleID)
 );
 
@@ -40,17 +40,17 @@ CREATE TABLE Payments (
 
 CREATE TABLE Products (
     ProductID int NOT NULL AUTO_INCREMENT,
-    ProductName varchar,
-    Price decimal,
-    Stock int,
+    ProductName varchar(255),
+    Price decimal NOT NULL,
+    Stock int NOT NULL,
     PRIMARY KEY(ProductID)
 );
 
 CREATE TABLE Orders (
     OrderID int NOT NULL AUTO_INCREMENT,
-    OrderDate DateTime,
-    UserID int,
-    ProductID int,
+    OrderDate DateTime NOT NULL,
+    UserID int NOT NULL,
+    ProductID int NOT NULL,
     PRIMARY KEY(OrderID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
