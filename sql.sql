@@ -22,9 +22,8 @@ CREATE TABLE Users (
     customer_email VARCHAR(50) NOT NULL UNIQUE,
     address_id INT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-
-        FOREIGN KEY (address_id) REFERENCES Addresses(address_id)
-        FOREIGN KEY (RoleId) REFERENCES Roles(RoleID)
+    FOREIGN KEY (address_id) REFERENCES Addresses(address_id),
+    FOREIGN KEY (RoleId) REFERENCES Roles(RoleID)
 );
 
 CREATE TABLE Payments (
